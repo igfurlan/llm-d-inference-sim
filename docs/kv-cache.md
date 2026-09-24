@@ -126,7 +126,7 @@ Each message has three ZMQ frames:
 | Frame | Content |
 |-------|---------|
 | 0 | Topic string (UTF-8) |
-| 1 | 8-byte big-endian sequence number (monotonically increasing per simulator instance) |
+| 1 | 8-byte big-endian sequence number (starts at 0, monotonically increasing per simulator instance) |
 | 2 | msgpack-encoded event batch |
 
 The event batch is a msgpack array with three fields:

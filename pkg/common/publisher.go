@@ -137,8 +137,8 @@ func (p *Publisher) PublishEvent(ctx context.Context, topic string, batch interf
 		return 0, nil, fmt.Errorf("failed to marshal event batch: %w", err)
 	}
 
-	// sequence number for ordering
-	seq := atomic.AddUint64(&p.seqNum, 1)
+	// sequence numbers start at 0, as in vLLM's publisher
+	seq := atomic.AddUint64(&p.seqNum, 1) - 1
 
 	// send topic, sequence, payload
 	msg := zmq4.NewMsgFrom([]byte(topic), EncodeSeq(seq), payload)
